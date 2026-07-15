@@ -10,7 +10,7 @@ This exercise in using operators and control structures was created by Scott Fei
 */
 
 #include <iostream>
-using namespace std;
+using namespace std;  
 
 int main() {
   // COST FOR FRUIT WHEN BOUGHT INDIVIDUALLY
@@ -52,35 +52,61 @@ int main() {
 
   // TODO: INPUT VALIDATION
   // Print error statements if any of the inputs or combinations of inputs are invalid!
-
+  if ((product_type != "watermelon") && (product_type != "apple") && (product_type != "banana")){
+    cout << "We don't have that..." << endl;
+    return 1; // ABORT
+  }
   if (quantity <= 0) {
     cout << "Invalid quantity entered! Quantity must be greater than zero. Aborting." << endl; // (this is an example of how I'd like you to print error messages for this lab)
     return 1; // abort
   }
+  if (accept_sale == "y"){
+    quantity += 1;
+  } 
 
-  if ((product_type == "banana") && !(unit_type == "single" || unit_type == "bunch")) {
+  if ((product_type == "apple") && !(unit_type == "single" || unit_type == "bag")) {
+    cout << "Invalid unit type entered! For apples, the unit type must be 'single' or 'bag'." << endl;
+    return 1; //ABORT
+  }
+  else if ((product_type == "banana") && !(unit_type == "single" || unit_type == "bunch")) {
     cout << "Invalid unit type entered! For bananas, the unit type must be 'single' or 'bunch'." << endl;
     return 1; // abort
   }
-  //...
-
+  else if ((product_type == "watermelon") && !(unit_type == "single")) {
+    cout << "Invalid unit type entered! For watermelons, the unit type can only be 'single'." << endl;
+    return 1; //ABORT
+  }
+  
   // TODO: COMPUTE THE COST OF THIS PURCHASE
+  // BANANAS
+
   if ((product_type == "banana") && (unit_type == "single")) {
     total_cost = quantity * (price_banana / 100.); // total cost in dollars
-    //...
+    item_cost = total_cost / quantity;   //item cost
+  } else if ((product_type == "banana") && (unit_type == "bunch")) {
+    total_cost = quantity * (price_bunch_bananas);  
+    item_cost = total_cost / (quantity *7);
   }
-  if (product_type == "banana") && (unit_type == "bunch")) {
-    total_cost = quantity *   //...
-    //...
+
+  // APPLES
+   if ((product_type == "apple") && (unit_type == "single")) {
+    total_cost = quantity * (price_apple / 100.); // total cost in dollars
+    item_cost = total_cost / quantity;
+  } else if ((product_type == "apple") && (unit_type == "bag")) {
+    total_cost = quantity * (price_bag_apples);  
+    item_cost = total_cost / (quantity *8);
   }
-  //...
-  //...
-
-
+  //WATERMELONS
+   if ((product_type == "watermelon") && (unit_type == "single")) {
+    total_cost = quantity * (price_watermelon / 100.); // total cost in dollars
+    item_cost = total_cost / quantity;
+    
+  } 
   // TODO: APPLY THE OPTIONAL DISCOUNT TO FINAL TOTAL COST
-  //...
-
-      
+  if (accept_sale == "y") {
+    total_cost *= 0.9;
+    item_cost *= 0.9;
+  }
   // DO NOT EDIT BELOW THIS LINE!
 
   // TELL USER THEIR FINAL TOTAL COST, AND COST PER FRUIT ITEM
